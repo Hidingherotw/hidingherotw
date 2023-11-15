@@ -28,8 +28,8 @@ window.onload = function(){
         }
 
         bg.src = `./src/image/q${page}-bg.png`;
-        btn1.style.backgroundImage = `url("../src/image/q${page}-btn1.png")`;
-        btn2.style.backgroundImage = `url("../src/image/q${page}-btn2.png")`;
+        btn1.style.backgroundImage = `url("./src/image/q${page}-btn1.png")`;
+        btn2.style.backgroundImage = `url("./src/image/q${page}-btn2.png")`;
 
         if (answerArr.length >= 2){
             btn1.style.display = "none";
