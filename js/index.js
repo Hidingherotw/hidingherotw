@@ -8,8 +8,8 @@ window.onload = function(){
     const sharetBtn = document.querySelector("#share-btn");
     const shareData = {
         title: document.title,
-        text: '快一起來尋找' + document.title + "吧!",
-        url: "https://hidingherotw.github.io/hidingherotw/index.html",
+        text: "快一起來尋找" + document.title + "吧!",
+        url: document.location.href
     }
 
     const firstPage = 0;
