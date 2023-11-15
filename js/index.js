@@ -77,8 +77,8 @@ window.onload = function(){
 
         const result = parseResult(answerArr);
 
-        body.style.backgroundColor = "#fce56d";
         bg.src = `./src/image/role-${result}.png`;
+        body.style.backgroundColor = "#fce56d";
     }
 
     startBtn.addEventListener("click", turnPage);
