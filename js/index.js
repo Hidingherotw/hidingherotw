@@ -6,6 +6,11 @@ window.onload = function(){
     const btn1 = document.querySelector("#btn1");
     const btn2 = document.querySelector("#btn2");
     const sharetBtn = document.querySelector("#share-btn");
+    const shareData = {
+        title: document.title,
+        text: '快一起來尋找' + document.title + "吧!",
+        url: "https://hidingherotw.github.io/hidingherotw/index.html",
+    }
 
     const firstPage = 0;
     const keyPage = 2;
@@ -86,7 +91,11 @@ window.onload = function(){
         turnPage(1)});
     btn2.addEventListener("click", () => {
         turnPage(2)});
-    sharetBtn.addEventListener("click", () => {
-
+    sharetBtn.addEventListener("click", async () => {
+      try {
+        await navigator.share(shareData)
+      } catch (err) {
+        console.log("Error: " + err);
+      }
     });
 }
