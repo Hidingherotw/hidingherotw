@@ -7,19 +7,19 @@ window.onload = function(){
     const btn2 = document.querySelector("#btn2");
     const sharetBtn = document.querySelector("#share-btn");
     
+    const firstPage = 0;
+    const keyPage = 2;
+    const lastPage = 4;
+    
+    let page = 0;
+    let recordPage = keyPage;
+    let answerArr = [];
+    
     const shareData = {
         title: document.title,
         text: "快一起來尋找" + document.title + "吧!",
         url: document.location.href,
     }
-
-    const firstPage = 0;
-    const keyPage = 2;
-    const lastPage = 4;
-
-    let page = 0;
-    let recordPage = keyPage;
-    let answerArr = [];
 
     function turnPage(answer){
         if (recordPage == page){
@@ -37,9 +37,11 @@ window.onload = function(){
         }
         page++;
 
+        bg.onload = () => {
+            btn1.style.backgroundImage = `url("./src/image/q${page}-btn1.png")`;
+            btn2.style.backgroundImage = `url("./src/image/q${page}-btn2.png")`;
+        }
         bg.src = `./src/image/q${page}-bg.png`;
-        btn1.style.backgroundImage = `url("./src/image/q${page}-btn1.png")`;
-        btn2.style.backgroundImage = `url("./src/image/q${page}-btn2.png")`;
 
         if (page > lastPage){
             showResult(answerArr);
@@ -79,12 +81,14 @@ window.onload = function(){
     function showResult(answerArr){
         btn1.style.display = "none";
         btn2.style.display = "none";
-        sharetBtn.style.display = "block";
-
+        
         const result = parseResult(answerArr);
-
+        
+        bg.onload = () => {
+            body.style.backgroundColor = "#fce56d";
+            sharetBtn.style.display = "block";
+        }
         bg.src = `./src/image/role-${result}.png`;
-        body.style.backgroundColor = "#fce56d";
     }
 
     startBtn.addEventListener("click", turnPage);
