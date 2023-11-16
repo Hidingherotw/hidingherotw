@@ -20,34 +20,7 @@ window.onload = function(){
         text: "快一起來尋找" + document.title + "吧!",
         url: document.location.href,
     }
-
-    function turnPage(answer){
-        if (recordPage == page){
-            answerArr.push(answer);
-        }
-
-        switch (page){
-            case firstPage:
-                start();
-                break;
-
-            case keyPage:
-                recordPage = recordPage + answer;
-                break;
-        }
-        page++;
-
-        bg.onload = () => {
-            btn1.style.backgroundImage = `url("./src/image/q${page}-btn1.png")`;
-            btn2.style.backgroundImage = `url("./src/image/q${page}-btn2.png")`;
-        }
-        bg.src = `./src/image/q${page}-bg.png`;
-
-        if (page > lastPage){
-            showResult(answerArr);
-        }
-    }
-
+    
     function start(){
         bgm.play();
         startBtn.style.display = "none";
@@ -91,6 +64,33 @@ window.onload = function(){
         bg.src = `./src/image/role-${result}.png`;
     }
 
+    function turnPage(answer){
+        if (recordPage == page){
+            answerArr.push(answer);
+        }
+
+        switch (page){
+            case firstPage:
+                start();
+                break;
+
+            case keyPage:
+                recordPage = recordPage + answer;
+                break;
+        }
+        page++;
+
+        bg.onload = () => {
+            btn1.style.backgroundImage = `url("./src/image/q${page}-btn1.png")`;
+            btn2.style.backgroundImage = `url("./src/image/q${page}-btn2.png")`;
+        }
+        bg.src = `./src/image/q${page}-bg.png`;
+
+        if (page > lastPage){
+            showResult(answerArr);
+        }
+    }
+    
     startBtn.addEventListener("click", turnPage);
     btn1.addEventListener("click", () => {
         turnPage(1)});
