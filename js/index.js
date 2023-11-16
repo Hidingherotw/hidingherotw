@@ -9,7 +9,7 @@ window.onload = function(){
     const shareData = {
         title: document.title,
         text: "快一起來尋找" + document.title + "吧!",
-        url: document.location.href
+        url: document.location.href,
     }
 
     const firstPage = 0;
@@ -21,7 +21,7 @@ window.onload = function(){
     let answerArr = [];
 
     function turnPage(answer){
-        if (recordPage== page){
+        if (recordPage == page){
             answerArr.push(answer);
         }
 
