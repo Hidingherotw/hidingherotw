@@ -25,6 +25,7 @@ body {
 .btn {
     background-repeat: no-repeat;
     position: absolute;
+    cursor: pointer;
 }
 #start-btn {
     width: 56%;

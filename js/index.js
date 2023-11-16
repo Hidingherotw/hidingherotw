@@ -20,7 +20,7 @@ window.onload = function(){
         text: "快一起來尋找" + document.title + "吧!",
         url: document.location.href,
     }
-    
+
     function start(){
         bgm.play();
         startBtn.style.display = "none";
@@ -58,7 +58,7 @@ window.onload = function(){
         const result = parseResult(answerArr);
         
         bg.onload = () => {
-            body.style.backgroundColor = "#fce56d";
+            body.style.backgroundColor = "#ffe86e";
             sharetBtn.style.display = "block";
         }
         bg.src = `./src/image/role-${result}.png`;
@@ -90,7 +90,7 @@ window.onload = function(){
             showResult(answerArr);
         }
     }
-    
+
     startBtn.addEventListener("click", turnPage);
     btn1.addEventListener("click", () => {
         turnPage(1)});
