@@ -6,6 +6,7 @@ window.onload = function(){
     const btn1 = document.querySelector("#btn1");
     const btn2 = document.querySelector("#btn2");
     const sharetBtn = document.querySelector("#share-btn");
+    
     const shareData = {
         title: document.title,
         text: "快一起來尋找" + document.title + "吧!",
