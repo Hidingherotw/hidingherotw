@@ -63,23 +63,27 @@ window.onload = function(){
     }
 
     function parseResult(){
-        let result = "";
+        const result = {};
 
         switch (answerArr.toString()){
             case "1,1":
-                result = "NT";
+                result.type = "NT";
+                result.bgColor = "#dccbd2";
                 break;
 
             case "1,2":
-                result = "NF";
+                result.type = "NF";
+                result.bgColor = "#c3d8c2";
                 break;
 
             case "2,1":
-                result = "SJ";
+                result.type = "SJ";
+                result.bgColor = "#cadfdd";
                 break;
 
             case "2,2":
-                result = "SP";
+                result.type = "SP";
+                result.bgColor = "#ede1bc";
                 break;
         }
 
@@ -90,13 +94,13 @@ window.onload = function(){
         const result = parseResult();
 
         bg.onload = () => {
-            body.style.backgroundColor = "#ffe86e";
+            body.style.backgroundColor = result.bgColor;
             sharetBtn.style.display = "block";
 
             bg.onload = null;
         };
 
-        bg.src = `./src/image/role-${result}.png`;
+        bg.src = `./src/image/role-${result.type}.png`;
     }
 
     function turnPage(answer){
