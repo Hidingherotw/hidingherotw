@@ -25,6 +25,8 @@ body {
 .btn {
     background-repeat: no-repeat;
     position: absolute;
+}
+.btn:hover {
     cursor: pointer;
 }
 #start-btn {

@@ -8,6 +8,12 @@ window.onload = function(){
     const optBtn = document.querySelectorAll(".opt-btn");
     const sharetBtn = document.querySelector("#share-btn");
     
+    const shareData = {
+        title: document.title,
+        text: "快一起來尋找" + document.title + "吧!",
+        url: document.location.href,
+    };
+
     const firstPage = 0;
     const keyPage = 2;
     const lastPage = 4;
@@ -16,12 +22,6 @@ window.onload = function(){
     let recordPage = keyPage;
     let answerArr = [];
 
-    const shareData = {
-        title: document.title,
-        text: "快一起來尋找" + document.title + "吧!",
-        url: document.location.href,
-    };
-
     function clearAllOptBtn(){
         optBtn.forEach((btn) => {
             btn.style.display = "none";
@@ -29,6 +29,7 @@ window.onload = function(){
     }
 
     function start(){
+        bgm.currentTime = 0;
         bgm.play();
 
         startBtn.style.display = "none";
@@ -54,11 +55,12 @@ window.onload = function(){
     function showNextPage(){
         bg.onload = () => {
             loadAllOptBtn();
+
+            bg.onload = null;
         };
         
         bg.src = `./src/image/q${page}-bg.png`;
     }
-
 
     function parseResult(){
         let result = "";
@@ -66,24 +68,20 @@ window.onload = function(){
         switch (answerArr.toString()){
             case "1,1":
                 result = "NT";
-
                 break;
 
             case "1,2":
                 result = "NF";
-
                 break;
 
             case "2,1":
                 result = "SJ";
-
                 break;
 
             case "2,2":
                 result = "SP";
-
                 break;
-        };
+        }
 
         return result;
     }
@@ -94,6 +92,8 @@ window.onload = function(){
         bg.onload = () => {
             body.style.backgroundColor = "#ffe86e";
             sharetBtn.style.display = "block";
+
+            bg.onload = null;
         };
 
         bg.src = `./src/image/role-${result}.png`;
@@ -102,44 +102,43 @@ window.onload = function(){
     function turnPage(answer){
         if (recordPage == page){
             answerArr.push(answer);
-        };
+        }
 
         clearAllOptBtn();
 
         switch (page){
             case firstPage:
                 start();
-
                 break;
+
             case keyPage:
                 recordPage += answer;
-
                 break;
+
             case lastPage:
-                bg.onload = null;
-
                 showResult();
-
                 break;
-        };
-        
+        }
+
         if (page < lastPage){
             page++;
 
             showNextPage();
-        };
+        }
     }
 
     startBtn.addEventListener("click", turnPage);
     btn1.addEventListener("click", () => {
-        turnPage(1);});
+        turnPage(1);
+    });
     btn2.addEventListener("click", () => {
-        turnPage(2);});
+        turnPage(2);
+    });
     sharetBtn.addEventListener("click", async () => {
         try {
             await navigator.share(shareData);
         } catch (err) {
             console.log("Error: " + err);
-        };
+        }
     });
 };
