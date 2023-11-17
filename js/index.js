@@ -5,6 +5,7 @@ window.onload = function(){
     const startBtn = document.querySelector("#start-btn");
     const btn1 = document.querySelector("#btn1");
     const btn2 = document.querySelector("#btn2");
+    const optBtn = document.querySelectorAll(".opt-btn");
     const sharetBtn = document.querySelector("#share-btn");
     
     const firstPage = 0;
@@ -14,93 +15,131 @@ window.onload = function(){
     let page = 0;
     let recordPage = keyPage;
     let answerArr = [];
-    
+
     const shareData = {
         title: document.title,
         text: "快一起來尋找" + document.title + "吧!",
         url: document.location.href,
+    };
+
+    function clearAllOptBtn(){
+        optBtn.forEach((btn) => {
+            btn.style.display = "none";
+        });
     }
 
     function start(){
         bgm.play();
+
         startBtn.style.display = "none";
-        btn1.style.display = "block";
-        btn2.style.display = "block";
     }
 
-    function parseResult(answerArr){
+    function loadOptBtn(btn){
+        const image = new Image();
+
+        image.src = `./src/image/q${page}-${btn.id}.png`;
+        
+        image.onload = () => {
+            btn.style.backgroundImage = `url("${image.src}")`;
+            btn.style.display = "block";
+        };
+    }
+
+    function loadAllOptBtn(){
+        optBtn.forEach((btn) => {
+            loadOptBtn(btn);
+        });
+    }
+
+    function showNextPage(){
+        bg.onload = () => {
+            loadAllOptBtn();
+        };
+        
+        bg.src = `./src/image/q${page}-bg.png`;
+    }
+
+
+    function parseResult(){
         let result = "";
 
         switch (answerArr.toString()){
             case "1,1":
                 result = "NT";
+
                 break;
 
             case "1,2":
                 result = "NF";
+
                 break;
 
             case "2,1":
                 result = "SJ";
+
                 break;
 
             case "2,2":
                 result = "SP";
+
                 break;
-        }
+        };
+
         return result;
     }
 
-    function showResult(answerArr){
-        btn1.style.display = "none";
-        btn2.style.display = "none";
-        
-        const result = parseResult(answerArr);
-        
+    function showResult(){        
+        const result = parseResult();
+
         bg.onload = () => {
             body.style.backgroundColor = "#ffe86e";
             sharetBtn.style.display = "block";
-        }
+        };
+
         bg.src = `./src/image/role-${result}.png`;
     }
 
     function turnPage(answer){
         if (recordPage == page){
             answerArr.push(answer);
-        }
+        };
+
+        clearAllOptBtn();
 
         switch (page){
             case firstPage:
                 start();
-                break;
 
+                break;
             case keyPage:
-                recordPage = recordPage + answer;
+                recordPage += answer;
+
                 break;
-        }
-        page++;
+            case lastPage:
+                bg.onload = null;
 
-        bg.onload = () => {
-            btn1.style.backgroundImage = `url("./src/image/q${page}-btn1.png")`;
-            btn2.style.backgroundImage = `url("./src/image/q${page}-btn2.png")`;
-        }
-        bg.src = `./src/image/q${page}-bg.png`;
+                showResult();
 
-        if (page > lastPage){
-            showResult(answerArr);
-        }
+                break;
+        };
+        
+        if (page < lastPage){
+            page++;
+
+            showNextPage();
+        };
     }
 
     startBtn.addEventListener("click", turnPage);
     btn1.addEventListener("click", () => {
-        turnPage(1)});
+        turnPage(1);});
     btn2.addEventListener("click", () => {
-        turnPage(2)});
+        turnPage(2);});
     sharetBtn.addEventListener("click", async () => {
-      try {
-        await navigator.share(shareData)
-      } catch (err) {
-        console.log("Error: " + err);
-      }
+        try {
+            await navigator.share(shareData);
+        } catch (err) {
+            console.log("Error: " + err);
+        };
     });
-}
+};
