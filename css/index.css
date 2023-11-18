@@ -12,7 +12,6 @@ body {
 }
 .container {
     width: 361px;
-    height: 641px;
     margin: auto;
     display: flex;
     position: relative;
@@ -31,16 +30,16 @@ body {
 }
 #start-btn {
     width: 56%;
-    height: 165px;
+    height: 26%;
     background-image: url("../src/image/start-btn.png");
     background-size: 180%;
-    background-position: 50% 46%;
+    background-position: 50% 46.5%;
     left: 22%;
     top: 35%
 }
 .opt-btn {
     width: 80%;
-    height: 62px;
+    height: 10%;
     background-size: 138%;
     background-repeat: no-repeat;
     background-position: 50% 53%;
@@ -56,7 +55,7 @@ body {
 }
 #share-btn {
     width: 40%;
-    height: 50px;
+    height: 8%;
     background-image: url("../src/image/share-btn.png");
     background-size: 100%;
     background-position: 50% 50%;
